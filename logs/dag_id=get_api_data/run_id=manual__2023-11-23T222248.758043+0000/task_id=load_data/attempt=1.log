@@ -1,0 +1,76 @@
+[2023-11-23T22:22:49.925+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: get_api_data.load_data manual__2023-11-23T22:22:48.758043+00:00 [queued]>
+[2023-11-23T22:22:49.933+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: get_api_data.load_data manual__2023-11-23T22:22:48.758043+00:00 [queued]>
+[2023-11-23T22:22:49.934+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-11-23T22:22:49.935+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 13
+[2023-11-23T22:22:49.935+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-11-23T22:22:49.948+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): load_data> on 2023-11-23 22:22:48.758043+00:00
+[2023-11-23T22:22:49.954+0000] {standard_task_runner.py:55} INFO - Started process 3421 to run task
+[2023-11-23T22:22:49.956+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'get_api_data', 'load_data', 'manual__2023-11-23T22:22:48.758043+00:00', '--job-id', '22', '--raw', '--subdir', 'DAGS_FOLDER/get_api_data.py', '--cfg-path', '/tmp/tmplze6p6rv']
+[2023-11-23T22:22:49.958+0000] {standard_task_runner.py:83} INFO - Job 22: Subtask load_data
+[2023-11-23T22:22:50.091+0000] {task_command.py:388} INFO - Running <TaskInstance: get_api_data.load_data manual__2023-11-23T22:22:48.758043+00:00 [running]> on host 00af56ec80d3
+[2023-11-23T22:22:50.303+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=get_api_data
+AIRFLOW_CTX_TASK_ID=load_data
+AIRFLOW_CTX_EXECUTION_DATE=2023-11-23T22:22:48.758043+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-11-23T22:22:48.758043+00:00
+[2023-11-23T22:22:51.829+0000] {logging_mixin.py:137} INFO - 2020-01: data extracting
+[2023-11-23T22:22:51.837+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/bs4/__init__.py:226: UserWarning: You provided Unicode markup but also provided a value for from_encoding. Your from_encoding will be ignored.
+  warnings.warn("You provided Unicode markup but also provided a value for from_encoding. Your from_encoding will be ignored.")
+
+[2023-11-23T22:22:52.753+0000] {logging_mixin.py:137} INFO - 2020-02: data extracting
+[2023-11-23T22:22:53.640+0000] {logging_mixin.py:137} INFO - 2020-03: data extracting
+[2023-11-23T22:22:54.613+0000] {logging_mixin.py:137} INFO - 2020-04: data extracting
+[2023-11-23T22:22:55.493+0000] {logging_mixin.py:137} INFO - 2020-05: data extracting
+[2023-11-23T22:22:56.438+0000] {logging_mixin.py:137} INFO - 2020-06: data extracting
+[2023-11-23T22:22:57.242+0000] {logging_mixin.py:137} INFO - 2020-07: data extracting
+[2023-11-23T22:22:58.065+0000] {logging_mixin.py:137} INFO - 2020-08: data extracting
+[2023-11-23T22:22:58.829+0000] {logging_mixin.py:137} INFO - 2020-09: data extracting
+[2023-11-23T22:22:59.800+0000] {logging_mixin.py:137} INFO - 2020-10: data extracting
+[2023-11-23T22:23:00.591+0000] {logging_mixin.py:137} INFO - 2020-11: data extracting
+[2023-11-23T22:23:01.364+0000] {logging_mixin.py:137} INFO - 2020-12: data extracting
+[2023-11-23T22:23:02.168+0000] {logging_mixin.py:137} INFO - 2021-01: data extracting
+[2023-11-23T22:23:02.980+0000] {logging_mixin.py:137} INFO - 2021-02: data extracting
+[2023-11-23T22:23:03.735+0000] {logging_mixin.py:137} INFO - 2021-03: data extracting
+[2023-11-23T22:23:04.580+0000] {logging_mixin.py:137} INFO - 2021-04: data extracting
+[2023-11-23T22:23:04.614+0000] {logging_mixin.py:137} INFO - 2021-05: data extracting
+[2023-11-23T22:23:05.361+0000] {logging_mixin.py:137} INFO - 2021-06: data extracting
+[2023-11-23T22:23:06.166+0000] {logging_mixin.py:137} INFO - 2021-07: data extracting
+[2023-11-23T22:23:07.217+0000] {logging_mixin.py:137} INFO - 2021-08: data extracting
+[2023-11-23T22:23:08.043+0000] {logging_mixin.py:137} INFO - 2021-09: data extracting
+[2023-11-23T22:23:08.775+0000] {logging_mixin.py:137} INFO - 2021-10: data extracting
+[2023-11-23T22:23:09.588+0000] {logging_mixin.py:137} INFO - 2021-11: data extracting
+[2023-11-23T22:23:10.417+0000] {logging_mixin.py:137} INFO - 2021-12: data extracting
+[2023-11-23T22:23:11.203+0000] {logging_mixin.py:137} INFO - 2022-01: data extracting
+[2023-11-23T22:23:12.028+0000] {logging_mixin.py:137} INFO - 2022-02: data extracting
+[2023-11-23T22:23:12.824+0000] {logging_mixin.py:137} INFO - 2022-03: data extracting
+[2023-11-23T22:23:13.644+0000] {logging_mixin.py:137} INFO - 2022-04: data extracting
+[2023-11-23T22:23:14.445+0000] {logging_mixin.py:137} INFO - 2022-05: data extracting
+[2023-11-23T22:23:15.235+0000] {logging_mixin.py:137} INFO - 2022-06: data extracting
+[2023-11-23T22:23:16.222+0000] {logging_mixin.py:137} INFO - 2022-07: data extracting
+[2023-11-23T22:23:16.972+0000] {logging_mixin.py:137} INFO - 2022-08: data extracting
+[2023-11-23T22:23:17.782+0000] {logging_mixin.py:137} INFO - 2022-09: data extracting
+[2023-11-23T22:23:18.783+0000] {logging_mixin.py:137} INFO - 2022-10: data extracting
+[2023-11-23T22:23:19.520+0000] {logging_mixin.py:137} INFO - 2022-11: data extracting
+[2023-11-23T22:23:20.322+0000] {logging_mixin.py:137} INFO - 2022-12: data extracting
+[2023-11-23T22:23:21.297+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-23T22:23:22.098+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-23T22:23:22.853+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-23T22:23:23.633+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-23T22:23:24.459+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-23T22:23:25.333+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-23T22:23:26.289+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-23T22:23:27.127+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-23T22:23:27.893+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-23T22:23:28.727+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-23T22:23:29.591+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-23T22:23:29.606+0000] {logging_mixin.py:137} INFO - Extract Data finished
+[2023-11-23T22:23:29.615+0000] {base.py:73} INFO - Using connection ID 'mysql_localhost' for task execution.
+[2023-11-23T22:23:29.706+0000] {logging_mixin.py:137} INFO - 460 rows inserted into Real_Estate_Transaction table.
+[2023-11-23T22:23:29.707+0000] {python.py:177} INFO - Done. Returned value was: None
+[2023-11-23T22:23:29.715+0000] {taskinstance.py:1323} INFO - Marking task as SUCCESS. dag_id=get_api_data, task_id=load_data, execution_date=20231123T222248, start_date=20231123T222249, end_date=20231123T222329
+[2023-11-23T22:23:29.772+0000] {local_task_job.py:208} INFO - Task exited with return code 0
+[2023-11-23T22:23:29.785+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,329 @@
+[2023-11-24T02:32:14.138+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: get_api_data.load_data manual__2023-11-23T22:33:54.606915+00:00 [queued]>
+[2023-11-24T02:32:14.146+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: get_api_data.load_data manual__2023-11-23T22:33:54.606915+00:00 [queued]>
+[2023-11-24T02:32:14.146+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-11-24T02:32:14.147+0000] {taskinstance.py:1280} INFO - Starting attempt 4 of 13
+[2023-11-24T02:32:14.147+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-11-24T02:32:14.159+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): load_data> on 2023-11-23 22:33:54.606915+00:00
+[2023-11-24T02:32:14.164+0000] {standard_task_runner.py:55} INFO - Started process 12039 to run task
+[2023-11-24T02:32:14.166+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'get_api_data', 'load_data', 'manual__2023-11-23T22:33:54.606915+00:00', '--job-id', '27', '--raw', '--subdir', 'DAGS_FOLDER/get_api_data.py', '--cfg-path', '/tmp/tmp7tnoqg8k']
+[2023-11-24T02:32:14.168+0000] {standard_task_runner.py:83} INFO - Job 27: Subtask load_data
+[2023-11-24T02:32:14.215+0000] {task_command.py:388} INFO - Running <TaskInstance: get_api_data.load_data manual__2023-11-23T22:33:54.606915+00:00 [running]> on host 00af56ec80d3
+[2023-11-24T02:32:14.270+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=***
+AIRFLOW_CTX_DAG_ID=get_api_data
+AIRFLOW_CTX_TASK_ID=load_data
+AIRFLOW_CTX_EXECUTION_DATE=2023-11-23T22:33:54.606915+00:00
+AIRFLOW_CTX_TRY_NUMBER=4
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-11-23T22:33:54.606915+00:00
+[2023-11-24T02:32:14.363+0000] {logging_mixin.py:137} INFO - ------------종로구---------------
+[2023-11-24T02:32:15.165+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:32:15.167+0000] {warnings.py:110} WARNING - /home/***/.local/lib/python3.7/site-packages/bs4/__init__.py:226: UserWarning: You provided Unicode markup but also provided a value for from_encoding. Your from_encoding will be ignored.
+  warnings.warn("You provided Unicode markup but also provided a value for from_encoding. Your from_encoding will be ignored.")
+
+[2023-11-24T02:32:15.943+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:32:16.483+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:32:17.015+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:32:17.589+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:32:18.112+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:32:20.060+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:32:20.847+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:32:21.384+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:32:21.950+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:32:22.682+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:32:22.683+0000] {logging_mixin.py:137} INFO - ------------중구---------------
+[2023-11-24T02:32:23.249+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:32:23.833+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:32:24.394+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:32:25.161+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:32:25.951+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:32:26.530+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:32:27.097+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:32:27.657+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:32:28.308+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:32:28.883+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:32:29.677+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:32:29.678+0000] {logging_mixin.py:137} INFO - ------------용산구---------------
+[2023-11-24T02:32:30.219+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:32:30.764+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:32:31.362+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:32:31.901+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:32:32.449+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:32:32.968+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:32:33.525+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:32:34.108+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:32:34.719+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:32:35.256+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:32:36.161+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:32:36.162+0000] {logging_mixin.py:137} INFO - ------------성동구---------------
+[2023-11-24T02:32:36.719+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:32:37.500+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:32:38.072+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:32:38.885+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:32:39.417+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:32:40.028+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:32:40.799+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:32:41.564+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:32:42.325+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:32:43.007+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:32:43.778+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:32:43.779+0000] {logging_mixin.py:137} INFO - ------------광진구---------------
+[2023-11-24T02:32:44.533+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:32:45.104+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:32:45.629+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:32:46.222+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:32:47.084+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:32:47.844+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:32:48.654+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:32:49.233+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:32:50.195+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:32:50.922+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:32:51.740+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:32:51.742+0000] {logging_mixin.py:137} INFO - ------------동대문구---------------
+[2023-11-24T02:32:52.480+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:32:53.023+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:32:53.798+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:32:54.563+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:32:55.363+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:32:55.975+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:32:56.591+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:32:57.210+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:32:57.824+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:32:58.434+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:32:59.258+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:32:59.259+0000] {logging_mixin.py:137} INFO - ------------중랑구---------------
+[2023-11-24T02:33:00.743+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:33:01.322+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:33:02.093+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:33:02.877+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:33:03.418+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:33:03.954+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:33:04.566+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:33:05.261+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:33:06.329+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:33:06.903+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:33:07.686+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:33:07.687+0000] {logging_mixin.py:137} INFO - ------------성북구---------------
+[2023-11-24T02:33:08.669+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:33:09.278+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:33:09.880+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:33:10.530+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:33:11.329+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:33:12.047+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:33:13.056+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:33:13.828+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:33:14.363+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:33:15.121+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:33:15.641+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:33:15.642+0000] {logging_mixin.py:137} INFO - ------------강북구---------------
+[2023-11-24T02:33:16.212+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:33:16.997+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:33:17.827+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:33:18.413+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:33:18.934+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:33:19.717+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:33:20.444+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:33:21.203+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:33:21.962+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:33:22.698+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:33:23.463+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:33:23.464+0000] {logging_mixin.py:137} INFO - ------------도봉구---------------
+[2023-11-24T02:33:24.045+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:33:24.832+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:33:25.746+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:33:26.516+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:33:27.108+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:33:27.628+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:33:28.155+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:33:28.710+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:33:29.430+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:33:30.125+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:33:31.618+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:33:31.619+0000] {logging_mixin.py:137} INFO - ------------노원구---------------
+[2023-11-24T02:33:32.197+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:33:32.754+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:33:33.313+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:33:33.910+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:33:34.658+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:33:35.228+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:33:35.950+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:33:36.523+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:33:37.112+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:33:37.687+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:33:38.293+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:33:38.294+0000] {logging_mixin.py:137} INFO - ------------은평구---------------
+[2023-11-24T02:33:39.066+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:33:39.842+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:33:40.569+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:33:41.123+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:33:41.874+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:33:42.538+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:33:43.125+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:33:43.694+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:33:44.278+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:33:44.845+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:33:45.387+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:33:45.388+0000] {logging_mixin.py:137} INFO - ------------서대문구---------------
+[2023-11-24T02:33:45.952+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:33:46.477+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:33:47.163+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:33:47.758+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:33:48.464+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:33:49.179+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:33:49.769+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:33:50.421+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:33:51.018+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:33:51.666+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:33:52.187+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:33:52.188+0000] {logging_mixin.py:137} INFO - ------------마포구---------------
+[2023-11-24T02:33:52.953+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:33:53.669+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:33:54.196+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:33:54.984+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:33:55.571+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:33:56.235+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:33:57.010+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:33:57.752+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:33:58.511+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:33:59.461+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:34:00.221+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:34:00.222+0000] {logging_mixin.py:137} INFO - ------------양천구---------------
+[2023-11-24T02:34:00.789+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:34:01.383+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:34:01.968+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:34:02.737+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:34:03.300+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:34:04.054+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:34:04.639+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:34:05.184+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:34:05.955+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:34:06.736+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:34:07.263+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:34:07.264+0000] {logging_mixin.py:137} INFO - ------------강서구---------------
+[2023-11-24T02:34:07.836+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:34:08.427+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:34:08.960+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:34:09.689+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:34:10.468+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:34:10.982+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:34:11.529+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:34:12.053+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:34:12.808+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:34:13.369+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:34:13.946+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:34:13.947+0000] {logging_mixin.py:137} INFO - ------------구로구---------------
+[2023-11-24T02:34:14.710+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:34:15.277+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:34:16.056+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:34:16.639+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:34:17.168+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:34:17.740+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:34:18.296+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:34:18.952+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:34:19.711+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:34:20.234+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:34:20.801+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:34:20.802+0000] {logging_mixin.py:137} INFO - ------------금천구---------------
+[2023-11-24T02:34:21.533+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:34:22.328+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:34:22.895+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:34:23.451+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:34:24.215+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:34:25.210+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:34:25.783+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:34:26.343+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:34:27.106+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:34:27.623+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:34:28.155+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:34:28.156+0000] {logging_mixin.py:137} INFO - ------------영등포구---------------
+[2023-11-24T02:34:28.868+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:34:29.416+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:34:29.982+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:34:30.766+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:34:31.306+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:34:32.076+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:34:32.630+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:34:33.374+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:34:33.899+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:34:34.514+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:34:35.038+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:34:35.039+0000] {logging_mixin.py:137} INFO - ------------동작구---------------
+[2023-11-24T02:34:35.777+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:34:36.532+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:34:37.254+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:34:38.041+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:34:38.612+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:34:39.393+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:34:39.906+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:34:40.687+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:34:41.277+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:34:42.029+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:34:43.469+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:34:43.470+0000] {logging_mixin.py:137} INFO - ------------관악구---------------
+[2023-11-24T02:34:44.252+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:34:44.864+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:34:45.408+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:34:45.939+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:34:46.460+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:34:47.028+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:34:47.598+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:34:48.329+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:34:48.905+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:34:49.694+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:34:50.285+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:34:50.286+0000] {logging_mixin.py:137} INFO - ------------서초구---------------
+[2023-11-24T02:34:50.850+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:34:51.626+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:34:52.213+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:34:52.786+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:34:53.564+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:34:54.378+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:34:54.972+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:34:55.529+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:34:56.063+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:34:56.653+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:34:57.389+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:34:57.390+0000] {logging_mixin.py:137} INFO - ------------강남구---------------
+[2023-11-24T02:34:58.106+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:34:58.679+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:34:59.432+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:35:00.167+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:35:00.957+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:35:01.477+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:35:02.078+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:35:02.656+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:35:03.190+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:35:03.749+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:35:04.715+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:35:04.716+0000] {logging_mixin.py:137} INFO - ------------송파구---------------
+[2023-11-24T02:35:05.306+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:35:05.862+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:35:06.378+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:35:07.665+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:35:08.186+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:35:08.917+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:35:09.695+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:35:10.211+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:35:10.982+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:35:11.697+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:35:12.284+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:35:12.285+0000] {logging_mixin.py:137} INFO - ------------강동구---------------
+[2023-11-24T02:35:13.044+0000] {logging_mixin.py:137} INFO - 2023-01: data extracting
+[2023-11-24T02:35:13.615+0000] {logging_mixin.py:137} INFO - 2023-02: data extracting
+[2023-11-24T02:35:15.412+0000] {logging_mixin.py:137} INFO - 2023-03: data extracting
+[2023-11-24T02:35:15.986+0000] {logging_mixin.py:137} INFO - 2023-04: data extracting
+[2023-11-24T02:35:16.741+0000] {logging_mixin.py:137} INFO - 2023-05: data extracting
+[2023-11-24T02:35:17.459+0000] {logging_mixin.py:137} INFO - 2023-06: data extracting
+[2023-11-24T02:35:18.053+0000] {logging_mixin.py:137} INFO - 2023-07: data extracting
+[2023-11-24T02:35:18.645+0000] {logging_mixin.py:137} INFO - 2023-08: data extracting
+[2023-11-24T02:35:19.422+0000] {logging_mixin.py:137} INFO - 2023-09: data extracting
+[2023-11-24T02:35:20.207+0000] {logging_mixin.py:137} INFO - 2023-10: data extracting
+[2023-11-24T02:35:20.961+0000] {logging_mixin.py:137} INFO - 2023-11: data extracting
+[2023-11-24T02:35:20.962+0000] {logging_mixin.py:137} INFO - Extract Data finished
+[2023-11-24T02:35:20.972+0000] {base.py:73} INFO - Using connection ID 'mysql_localhost' for task execution.
+[2023-11-24T02:35:20.990+0000] {logging_mixin.py:137} INFO - 0 rows inserted into Real_Estate_Transaction table.
+[2023-11-24T02:35:20.991+0000] {python.py:177} INFO - Done. Returned value was: None
+[2023-11-24T02:35:21.001+0000] {taskinstance.py:1323} INFO - Marking task as SUCCESS. dag_id=get_api_data, task_id=load_data, execution_date=20231123T223354, start_date=20231124T023214, end_date=20231124T023521
+[2023-11-24T02:35:21.030+0000] {local_task_job.py:208} INFO - Task exited with return code 0
+[2023-11-24T02:35:21.044+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check

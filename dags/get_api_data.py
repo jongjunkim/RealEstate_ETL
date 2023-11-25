@@ -185,7 +185,7 @@ def truncate_table(table_name, **kwargs):
  
 with DAG(
     'get_api_data',
-    schedule_interval = '0 16 * * *',
+    schedule_interval = '0 12 * * *',
     start_date = datetime(2023, 11, 21),
     catchup = False,
     tags = ['RealEstate'],

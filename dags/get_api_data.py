@@ -108,15 +108,6 @@ def getcitycode():
     #Gu_code and Dong name
     dong_to_code_dict = {row['code'][:5]: row['name'].split()[1] for index, row in code[city_mask].iloc[1:].iterrows()}
 
-
-    '''
-    gu_name = code[city_mask]['name'].str.split().str[1].tolist()
-    city_codes = code[city_mask]['code'].str[:5].tolist()
-    city_codes = set(city_codes) #To delete duplicate city_codes
-    gu_name = set(gu_name)
-    '''
-    #dong_to_code_dict = dict(zip(gu_name, city_codes))
-
     return dong_to_code_dict
 
 

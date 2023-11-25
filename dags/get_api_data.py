@@ -191,7 +191,7 @@ with DAG(
     tags = ['RealEstate'],
     default_args={
         'retries': 12,
-        'retry_delay': timedelta(minutes = 1),
+        'retry_delay': timedelta(hours = 1),
     }
 )as dag:
     

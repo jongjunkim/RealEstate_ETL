@@ -42,7 +42,7 @@ def extract():
 #Extract
 def get_data(gu_code, date):
     url = 'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev'
-    api_key_utf8 = 'TeJ7AtefZIJBvZ7XigcoXmd8XmSMW8ZabeVo%2FXKoNfIu5p6gSBNJd5UU9DnWaNOEJdzK6ljdV2pjXVAmYq6QYQ%3D%3D'
+    api_key_utf8 = 'secret'
     api_key_decode = requests.utils.unquote(api_key_utf8, encoding='utf-8') 
     params ={'serviceKey' : api_key_decode, 'LAWD_CD' : gu_code, 'DEAL_YMD' : date}
     response = requests.get(url, params=params)

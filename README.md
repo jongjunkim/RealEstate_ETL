@@ -11,4 +11,8 @@
 
 
 # Note
-* No Modue
+## Issue
+* ModuleNotFoundError No module named 'pyspark'
+## Solution
+docker.yaml -> _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:- yfinance pandas numpy oauth2client gspread pyspark}
+

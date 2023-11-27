@@ -11,6 +11,10 @@
 5. Slack으로 에러 확인 (Slack Integration for Error Notification) To be done
 
 
+# DAG Pipeline
+Public RESTful API -> MySQL -> S3 -> SPARK -> Imagefile
+
+
 # Note
 ## Issue
 * ModuleNotFoundError No module named 'pyspark'

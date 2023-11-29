@@ -21,3 +21,8 @@ Public RESTful API -> MySQL -> S3 -> SPARK -> Imagefile
 * Solution
 * docker.yaml -> _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:- yfinance pandas numpy oauth2client gspread pyspark}
 
+# MySQL 
+![image](https://github.com/jongjunkim/RealEstate_ETL/blob/main/image/mysql%20image.PNG)
+
+# S3 bucket
+![image](https://github.com/jongjunkim/RealEstate_ETL/blob/main/image/s3done.PNG)

@@ -23,12 +23,16 @@ Public RESTful API -> MySQL -> S3 -> SPARK(ELT) -> Imagefile
 
 ### Airflow Connection type missing Spark
 #### Solution
-* Dockerfile에
-* FROM apache/airflow:2.5.1
-* RUN pip install --no-cache-dir apache-airflow-providers-apache-spark==3.0.0 추가뒤
-
-*
+* Dockerfile에 아래와 같은 형식으로 저장 뒤에 airflow와 spark는 컴퓨터 다운로드된 버전으로
   
+![image](https://github.com/jongjunkim/RealEstate_ETL/blob/main/image/dockerfile.PNG)
+
+
+* docker-compose.yaml 파일에 가서 #build: . -> build .
+
+![image](https://github.com/jongjunkim/RealEstate_ETL/blob/main/image/docker.PNG)
+
+* docker-compose build 하고 docker compose up하면 끝
 
 # MySQL 
 ![image](https://github.com/jongjunkim/RealEstate_ETL/blob/main/image/mysql%20image.PNG)

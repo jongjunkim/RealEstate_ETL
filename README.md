@@ -17,12 +17,23 @@ Public RESTful API -> MySQL -> S3 -> SPARK(ELT) -> Imagefile
 
 # Note
 ## Issue
-* ModuleNotFoundError No module named 'pyspark'
-* Solution
+### ModuleNotFoundError No module named 'pyspark'
+#### Solution
 * docker.yaml -> _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:- yfinance pandas numpy oauth2client gspread pyspark}
+
+### Airflow Connection type missing Spark
+#### Solution
+* Dockerfile에
+* FROM apache/airflow:2.5.1
+* RUN pip install --no-cache-dir apache-airflow-providers-apache-spark==3.0.0 추가뒤
+
+*
+  
 
 # MySQL 
 ![image](https://github.com/jongjunkim/RealEstate_ETL/blob/main/image/mysql%20image.PNG)
 
 # S3 bucket
 ![image](https://github.com/jongjunkim/RealEstate_ETL/blob/main/image/s3done.PNG)
+
+

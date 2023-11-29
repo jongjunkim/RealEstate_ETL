@@ -31,6 +31,6 @@ mysql_to_s3_nps = SqlToS3Operator(
     aws_conn_id = "aws_s3",
     verify = False,
     replace = True,
-    pd_kwargs={"index": False, "header": False},    
+    pd_kwargs={"index": False, "header": False, "encoding":"utf-8-sig"}, # Encoding : utf-8-sig to support Korean in csv file    
     dag = dag
 )

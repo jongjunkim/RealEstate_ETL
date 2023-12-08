@@ -11,7 +11,36 @@ from airflow import DAG
 from airflow.providers.mysql.operators.mysql import MySqlOperator
 from airflow.operators.python import PythonOperator
 from airflow.hooks.mysql_hook import MySqlHook
+from plugins import slack 
+from airflow.providers.amazon.aws.transfers.sql_to_s3 import SqlToS3Operator
 
+
+'''
+DEAL_DATE,
+"SERIAL"        = 일련번호,
+"DEAL_TYPE"     = 거래유형,
+"BUILD_NM"      = 아파트,
+"FLOOR"         = 층,
+"BUILD_YEAR"    = 건축년도,
+"AREA"          = 전용면적,
+"AMOUNT"        = 거래금액,
+"ROAD_CD"       = 도로명코드,
+"ROAD_NM"       = 도로명,
+"BUILD_MAJOR"   = 도로명건물본번호코드,
+"BUILD_MINOR"   = 도로명건물부번호코드,
+"ROAD_SEQ"      = 도로명일련번호코드,
+"BASEMENT_FLAG" = 도로명지상지하코드,
+"LAND_NO"       = 지번,
+"DONG_NM"       = 법정동,
+"DONG_MAJOR"    = 법정동본번코드,
+"DONG_MINOR"    = 법정동부번코드,
+"EUBMYNDONG_CD" = 법정동읍면동코드,
+"DONG_LAND_NO"  = 법정동지번코드,
+"DEALER_ADDR"   = 중개사소재지,
+"CANCEL_DEAL"   = 해제여부,
+"CANCEL_DATE"   = 해제사유발생일
+
+'''
 
 def extract():
 
@@ -24,6 +53,12 @@ def extract():
         print(f"------------{gu_name}---------------")
         for base_date in base_date_list:
             response = get_data(gu_code, base_date)
+            # Check if API response is successful
+            
+            if response.status_code != 200:
+                print(f"Error: API request failed with status code {response.status_code}")
+                continue
+            
             formatted_date = datetime.strptime(str(base_date), '%Y%m').strftime('%Y-%m')
             print(f"{formatted_date}: data extracting")
             soup = BeautifulSoup(response.text, 'lxml-xml', from_encoding='euc-kr')
@@ -41,15 +76,18 @@ def extract():
 
 #Extract
 def get_data(gu_code, date):
-    url = 'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev'
-    api_key_utf8 = 'secret'
+    url = 'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev' 
+    api_key_utf8 = 'TeJ7AtefZIJBvZ7XigcoXmd8XmSMW8ZabeVo%2FXKoNfIu5p6gSBNJd5UU9DnWaNOEJdzK6ljdV2pjXVAmYq6QYQ%3D%3D'  #카카오
+    #api_key_utf8 = 'J7oQJv0rlTQKMULGGutegrlWz3H1jz%2FMJYmvuFzU5jUKgLGj6EIzbxr%2FxJQaBBSUctSSoMZm7LV8R2vZLpvGig%3D%3D' #내꺼 네이버
+    #api_key_utf8 = 'Qeid1rpTYGWV8pG8Xw2TTrpqUEB8a6iOsIvgQDVAKhrt15HOs8hgRwjI2Zs6MswHepJVAiGFelju2AKoJP8BtA%3D%3D' #희나 카카오
+    #api_key_utf8 = 'bMUHBgbghVBjXJLsXl5p3ytzHMFMCUrCkSEC%2BxaGelTMjOuBCqY4mF9H0qbOpYUSxfg0AFXikYC%2BNyst10CBwA%3D%3D' #희나 네이버
     api_key_decode = requests.utils.unquote(api_key_utf8, encoding='utf-8') 
     params ={'serviceKey' : api_key_decode, 'LAWD_CD' : gu_code, 'DEAL_YMD' : date}
     response = requests.get(url, params=params)
 
     return response
 
-#Transform
+#Transform data 
 def parse(item):
     try:
         거래금액 = item.find("거래금액").get_text()
@@ -68,7 +106,7 @@ def parse(item):
             "거래금액": 거래금액,
             "건축년도": 건축년도,
             "거래년도": 거래년도,
-            "도로명수": 도로명,
+            "도로명": 도로명,
             "법정동": 법정동,
             "아파트": 아파트,
             "거래월": 거래월,
@@ -95,8 +133,10 @@ def parse(item):
         }
 
 
+#get gu code in Seoul from text file
 def getcitycode():
     code_file = r"/opt/airflow/data/법정동코드.txt"
+    #code_file = r"C:\Users\JONGJUN KIM\OneDrive\Desktop\ETL프로젝트\법정동코드.txt"
     code = pd.read_csv(code_file, sep='\t')
     code.columns = ['code', 'name', 'is_exist']
     code = code[code['is_exist'] == '존재']
@@ -131,15 +171,28 @@ def get_MySQL_connection():
 def load():
     df = extract()
     cur = get_MySQL_connection()
-    
-    
-    all_values = []
+    print(df.head())
+
+    # Save DataFrame to a CSV file
+    #df.to_csv(r"/opt/airflow/data/gu_transaction_data.csv", encoding='utf-8-sig', index=False)
+    print(f"DataFrame saved to gu_transaction_data")
+
+    if len(df) == 0:
+        raise ValueError("Error: DataFrame is empty. No data to insert.")
+        
+
+    rows_to_insert = []
 
     for index, row in df.iterrows():
+
+        if any(pd.isnull(row)):
+            print(f"Skipped row {index + 1} because it contains None values.")
+            continue
+
         거래금액 = int(row['거래금액'].replace(',', '').replace(' ', ''))
         건축년도 = (row['건축년도'])
         거래년도 = (row['거래년도'])
-        도로명수 = (row['도로명수'])
+        도로명 = (row['도로명'])
         법정동 = (row['법정동'])
         아파트 = (row['아파트'])
         거래월 = str(row['거래월']).zfill(2)  # Zero-padding the month
@@ -150,18 +203,21 @@ def load():
         층 = int((row['층']))
         구 = (row['구'])
         DealYMD = datetime.strptime(str(거래년도) + str(거래월) + str(거래일), '%Y%m%d').strftime('%Y-%m-%d')
-        values = (DealYMD, 거래금액, 건축년도, 도로명수, 법정동, 아파트, 전용면적, 지번, 지역코드, 층, 구)
-        all_values.append(values)
-        
-    sql = "INSERT INTO Real_Estate_Transaction (DealYMD, 거래금액, 건축년도, 도로명수, 법정동, 아파트, 전용면적, 지번, 지역코드, 층, 구) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    cur.executemany(sql, all_values)
+        values = (DealYMD, 거래금액, 건축년도, 도로명, 법정동, 아파트, 전용면적, 지번, 지역코드, 층, 구)
+        rows_to_insert.append(values)
+    
+    sql = "INSERT INTO Real_Estate_Transaction (DealYMD, 거래금액, 건축년도, 도로명, 법정동, 아파트, 전용면적, 지번, 지역코드, 층, 구) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    cur.executemany(sql, rows_to_insert)
+
     cur.execute("COMMIT;") #commit안하면 위에 있는 것들 insert하더라도 MYSQL테이블에 들어가지 못함
+    print(f"{len(df)} rows inserted into Real_Estate_Transaction table.")
 
-    print(f"{len(all_values)} rows inserted into Real_Estate_Transaction table.")
-
+    
 
 def table_exists(cur, table_name):
     return cur.execute("SHOW TABLES LIKE 'real_estate_transaction'")
+
+
 
 #To manage data with Full-Refresh
 def truncate_table(table_name, **kwargs):
@@ -182,23 +238,32 @@ def truncate_table(table_name, **kwargs):
         print(f"Table '{table_name}' does not exist.")
 
 
- 
+
+sql = """
+    SELECT * FROM real_estate_transaction;
+"""
+
+current_date = datetime.now().strftime("%Y-%m-%d")
+file_with_date = f'Seoul_gu_transaction_{current_date}.csv'
+
+
 with DAG(
     'get_api_data',
-    schedule_interval = '0 12 * * *',
-    start_date = datetime(2023, 11, 21),
-    catchup = False,
-    tags = ['RealEstate'],
+    schedule_interval='* 9 * * *',  
+    start_date=datetime(2023, 11, 21),
+    catchup=False,
+    tags=['RealEstate'],
     default_args={
         'retries': 12,
-        'retry_delay': timedelta(hours = 1),
+        'retry_delay': timedelta(minutes=1),
+        'on_failure_callback': slack.on_failure_callback,
     }
-)as dag:
+) as dag:
     
     truncate_existing_data_task = PythonOperator(
         task_id="truncate_existing_data",
         python_callable=truncate_table,
-        op_args=['Real_Estate_Transaction'], #when the truncate_table function is called, it will receive a single positional argument, which is the string 'Real_Estate_Transaction'.
+        op_args=['Real_Estate_Transaction'],
         provide_context=True
     )
 
@@ -207,5 +272,18 @@ with DAG(
         python_callable=load
     )
 
-    truncate_existing_data_task >> load_task
+    mysql_to_s3 = SqlToS3Operator(
+        task_id = 'loadS3',
+        query = sql,
+        s3_bucket = 'jongjun',
+        s3_key = file_with_date,
+        sql_conn_id = "mysql_localhost",
+        aws_conn_id = "aws_s3",
+        verify = False,
+        replace = True,
+        pd_kwargs={"index": False, "header": False, "encoding":"utf-8-sig"},    
+        dag = dag
+    )
+
+    truncate_existing_data_task >> load_task >> mysql_to_s3
 

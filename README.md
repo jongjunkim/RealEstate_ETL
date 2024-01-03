@@ -6,7 +6,7 @@
 # 초기 프로젝트 설명
 1. 한국 부동산 공공 api를 이용해 매일 전날의 데이터를 MySQL에 ETL하는 DAG (Korean Real Estate Public API to MySQL ETL) Done
 2. 그리고 MySQL에 데이터를 Amazon S3에 적재 (MySQL to Amazon S3)  Done
-3. S3에 저장되어이 있는 데이터를 Pyspark이용해서 ELT (Meaningful data) To be done
+3. S3에 저장되어이 있는 데이터를 Pyspark이용해서 ELT (Meaningful data) Done
 4. Data Visualation BI tools사용 (Data Visualization with BI Tools) To be done
 5. Slack으로 에러 확인 (Slack Integration for Error Notification) To be done
 

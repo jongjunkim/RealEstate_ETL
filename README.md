@@ -3,7 +3,7 @@
 # Stack
 1. Airflow, Docker, Python, Amazon S3, Slack
 
-# 프로젝트 설명
+# 초기 프로젝트 설명
 1. 한국 부동산 공공 api를 이용해 매일 전날의 데이터를 MySQL에 ETL하는 DAG (Korean Real Estate Public API to MySQL ETL) Done
 2. 그리고 MySQL에 데이터를 Amazon S3에 적재 (MySQL to Amazon S3)  Done
 3. S3에 저장되어이 있는 데이터를 Pyspark이용해서 ELT (Meaningful data) To be done
@@ -12,7 +12,8 @@
 
 # 프로젝트 변경사항
 1. 맨처음 Window 환경에서 돌렸으나 현업에서 linux를 많이 쓰기에 linux환경에 익숙해 지기 위해 우분투를 이용해 서버 구축
-2. 
+2. Data processing을 기존에는 python Dataframe을 이용했으나 추후에 빅데이터를 처리하기 위해서는 Spark를 이용해야하기 때문에 Spark Dataframe을 이용해서 Data preprocessing 및 analysis
+
 # DAG Pipeline
 Public RESTful API -> MySQL -> S3 -> SPARK(ELT) -> Imagefile
 

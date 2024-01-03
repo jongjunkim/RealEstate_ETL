@@ -10,7 +10,9 @@
 4. Data Visualation BI tools사용 (Data Visualization with BI Tools) To be done
 5. Slack으로 에러 확인 (Slack Integration for Error Notification) To be done
 
-
+# 프로젝트 변경사항
+1. 맨처음 Window 환경에서 돌렸으나 현업에서 linux를 많이 쓰기에 linux환경에 익숙해 지기 위해 우분투를 이용해 서버 구축
+2. 
 # DAG Pipeline
 Public RESTful API -> MySQL -> S3 -> SPARK(ELT) -> Imagefile
 

@@ -37,6 +37,11 @@ Public RESTful API -> MySQL -> S3 -> SPARK(ELT) -> Imagefile
 
 * docker-compose build 하고 docker compose up하면 끝
 
+### root@localhost access denied error 
+1. Ubuntu환경에 있는 Mysql과 Airflow를 connect하려했지만 자꾸 이 에러가 뜸
+2. 아무래도 ubuntu 와 window에 둘다 MySQL 있고 이미 Window에 설치되어있는 MySQL port가 3306을 쓰고있고 ubuntu MySQL도 3306을 쓰려하니 ubuntu MySQL계정을 인식을 못한다고 생각
+3. ubuntu에 있는 MySQL port를 3307로 변경하고 host도 내 아이피 주소가 아닌 127.01.01로 바꿔주니 연결됨
+
 # MySQL 
 ![image](https://github.com/jongjunkim/RealEstate_ETL/blob/main/image/mysql%20image.PNG)
 

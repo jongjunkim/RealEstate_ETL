@@ -103,7 +103,7 @@ def get_data(gu_code, date):
     url = 'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev' 
     #api_key_utf8 = 'TeJ7AtefZIJBvZ7XigcoXmd8XmSMW8ZabeVo%2FXKoNfIu5p6gSBNJd5UU9DnWaNOEJdzK6ljdV2pjXVAmYq6QYQ%3D%3D' 
 
-    api_key_utf8 = 'J7oQJv0rlTQKMULGGutegrlWz3H1jz%2FMJYmvuFzU5jUKgLGj6EIzbxr%2FxJQaBBSUctSSoMZm7LV8R2vZLpvGig%3D%3D' #내꺼 네이버
+    api_key_utf8 = 'J7oQJv0rlTQKMULGGutegrlWz3H1jz%2FMJYmvuFzU5jUKgLGj6EIzbxr%2FxJQaBBSUctSSoMZm7LV8R2vZLpvGig%3D%3D' #네이버
 
     api_key_decode = requests.utils.unquote(api_key_utf8, encoding='utf-8') 
     params ={'serviceKey' : api_key_decode, 'LAWD_CD' : gu_code, 'DEAL_YMD' : date}

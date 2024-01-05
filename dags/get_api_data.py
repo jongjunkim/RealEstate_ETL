@@ -1,17 +1,20 @@
-from datetime import datetime, date, timedelta
 import pandas as pd
 from sqlalchemy import create_engine
 import requests
 from datetime import datetime, date, timedelta
-import pandas as pd
 from bs4 import BeautifulSoup
 from datetime import date
 import xml.etree.ElementTree
+import findspark
+findspark.init()
+from pyspark import SparkConf, SparkContext
+from pyspark.sql import SQLContext
+from pyspark.sql import SparkSession
+from pyspark.sql.types import StructField, StructType, IntegerType, StringType, FloatType, DateType
 from airflow import DAG
 from airflow.providers.mysql.operators.mysql import MySqlOperator
 from airflow.operators.python import PythonOperator
 from airflow.hooks.mysql_hook import MySqlHook
-from plugins import slack 
 from airflow.providers.amazon.aws.transfers.sql_to_s3 import SqlToS3Operator
 
 
@@ -42,7 +45,11 @@ DEAL_DATE,
 
 '''
 
-def extract():
+
+spark = SparkSession.builder.master("local[*]").config("spark.driver.extraClassPath","/home/rkdlem196/mysql-connector-java-8.0.28/mysql-connector-java-8.0.28.jar").appName("pyspark").getOrCreate()
+
+#RestAPI로 부터 데이터를 받은뒤 데이터 타입에 맞게 Parsing한후 SparkDataframe으로 변환
+def getRealEstateData():
 
     gu_code_dict = getcitycode()
     base_date_list = getdates()
@@ -51,8 +58,9 @@ def extract():
 
     for gu_code, gu_name in gu_code_dict.items():
         print(f"------------{gu_name}---------------")
+        #print("------------종로구---------------")
         for base_date in base_date_list:
-            response = get_data(gu_code, base_date)
+            response = get_data(11110, base_date)
             # Check if API response is successful
             
             if response.status_code != 200:
@@ -66,40 +74,61 @@ def extract():
             for item in items:
                 transaction_data = parse(item)
                 transaction_data['구'] = gu_name
+                #transaction_data['구'] = "종로구"
                 gu_transcation.append(transaction_data)
-    
-    print("Extract Data finished")
-    
-    df = pd.DataFrame(gu_transcation)
-    
-    return df
 
-#Extract
+    print("Extract Data finished")
+
+    real_estate_schema = StructType([
+        StructField("DealYMD", StringType(), True),
+        StructField("거래금액", IntegerType(), True),
+        StructField("건축년도", StringType(), True),
+        StructField("도로명", StringType(), True),
+        StructField("법정동", StringType(), True),
+        StructField("아파트", StringType(), True),
+        StructField("전용면적", FloatType(), True),
+        StructField("지번", StringType(), True),
+        StructField("지역코드", IntegerType(), True),
+        StructField("층", IntegerType(), True),
+        StructField("구", StringType(), True)
+    ])
+
+    spark_dataframe = spark.createDataFrame(gu_transcation, real_estate_schema)
+
+    
+    return spark_dataframe
+
+#URL을 통해 데이터 호출
 def get_data(gu_code, date):
     url = 'http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev' 
-    api_key_utf8 = 'TeJ7AtefZIJBvZ7XigcoXmd8XmSMW8ZabeVo%2FXKoNfIu5p6gSBNJd5UU9DnWaNOEJdzK6ljdV2pjXVAmYq6QYQ%3D%3D' 
+    #api_key_utf8 = 'TeJ7AtefZIJBvZ7XigcoXmd8XmSMW8ZabeVo%2FXKoNfIu5p6gSBNJd5UU9DnWaNOEJdzK6ljdV2pjXVAmYq6QYQ%3D%3D' 
+
+    api_key_utf8 = 'J7oQJv0rlTQKMULGGutegrlWz3H1jz%2FMJYmvuFzU5jUKgLGj6EIzbxr%2FxJQaBBSUctSSoMZm7LV8R2vZLpvGig%3D%3D' #내꺼 네이버
+
     api_key_decode = requests.utils.unquote(api_key_utf8, encoding='utf-8') 
     params ={'serviceKey' : api_key_decode, 'LAWD_CD' : gu_code, 'DEAL_YMD' : date}
     response = requests.get(url, params=params)
 
     return response
 
-#Transform data 
+#parse data 
 def parse(item):
     try:
-        거래금액 = item.find("거래금액").get_text()
+        거래금액 = int(item.find("거래금액").get_text().replace(',', '').strip())
         건축년도 = item.find("건축년도").get_text()
         거래년도 = item.find("년").get_text()
         도로명 = item.find("도로명").get_text()
         법정동 = item.find("법정동").get_text()
         아파트 = item.find("아파트").get_text()
-        거래월 = item.find("월").get_text()
-        거래일 = item.find("일").get_text()
-        전용면적 = item.find("전용면적").get_text()
+        거래월 = str(item.find("월").get_text()).zfill(2)
+        거래일 = str(item.find("일").get_text()).zfill(2)
+        전용면적 = float(item.find("전용면적").get_text())
         지번 = item.find("지번").get_text()
-        지역코드 = item.find("지역코드").get_text()
-        층 = item.find("층").get_text()
+        지역코드 = int(item.find("지역코드").get_text())
+        층 = int(item.find("층").get_text()) 
+        DealYMD = datetime.strptime(거래년도 + 거래월 + 거래일, '%Y%m%d').strftime('%Y-%m-%d')
         return {
+            "DealYMD":DealYMD,
             "거래금액": 거래금액,
             "건축년도": 건축년도,
             "거래년도": 거래년도,
@@ -115,6 +144,7 @@ def parse(item):
         }
     except AttributeError as e:
         return {
+            "DealYMD": None,
             "거래금액": None,
             "건축년도": None,
             "거래년도": None,
@@ -128,12 +158,12 @@ def parse(item):
             "지역코드": None,
             "층": None
         }
+    except AttributeError as e:
+        return None 
 
-
-#get gu code in Seoul from text file
+#구 코드를 local파일에 저장되어있는 법정동 텍스트파일에서 읽기
 def getcitycode():
-    code_file = r"/opt/airflow/data/법정동코드.txt"
-    #code_file = r"C:\Users\JONGJUN KIM\OneDrive\Desktop\ETL프로젝트\법정동코드.txt"
+    code_file = r"/home/rkdlem196/airflow/data/법정동코드.txt"
     code = pd.read_csv(code_file, sep='\t')
     code.columns = ['code', 'name', 'is_exist']
     code = code[code['is_exist'] == '존재']
@@ -147,7 +177,7 @@ def getcitycode():
 
     return dong_to_code_dict
 
-
+# 불러올 데이터의 날짜들을 만들어내기
 def getdates():
 
     current_date = date.today()
@@ -165,74 +195,29 @@ def get_MySQL_connection():
     hook = MySqlHook(mysql_conn_id='mysql_localhost')
     return hook.get_conn().cursor()
 
-def load():
-    df = extract()
-    cur = get_MySQL_connection()
-    print(df.head())
 
-    # Save DataFrame to a CSV file
-    #df.to_csv(r"/opt/airflow/data/gu_transaction_data.csv", encoding='utf-8-sig', index=False)
-    print(f"DataFrame saved to gu_transaction_data")
+#데이터를 MySQL로 load
+def loadToMySQL():
+    dataframe = getRealEstateData()
 
-    if len(df) == 0:
+    dataframe.show(10)
+
+    if type(dataframe) == tuple:
+        dataframe[0].cache()#cache의 수명은 함수가 호출되서 끝나기까지 이므로 매 함수마다 적용
+    else:
+        dataframe.cache()
+
+    if dataframe.count() == 0:
         raise ValueError("Error: DataFrame is empty. No data to insert.")
         
-
-    rows_to_insert = []
-
-    for index, row in df.iterrows():
-
-        if any(pd.isnull(row)):
-            print(f"Skipped row {index + 1} because it contains None values.")
-            continue
-
-        거래금액 = int(row['거래금액'].replace(',', '').replace(' ', ''))
-        건축년도 = (row['건축년도'])
-        거래년도 = (row['거래년도'])
-        도로명 = (row['도로명'])
-        법정동 = (row['법정동'])
-        아파트 = (row['아파트'])
-        거래월 = str(row['거래월']).zfill(2)  # Zero-padding the month
-        거래일 = str(row['거래일']).zfill(2)  # Zero-padding the day
-        전용면적 = float((row['전용면적']))
-        지번 = (row['지번'])
-        지역코드 = (row['지역코드'])
-        층 = int((row['층']))
-        구 = (row['구'])
-        DealYMD = datetime.strptime(str(거래년도) + str(거래월) + str(거래일), '%Y%m%d').strftime('%Y-%m-%d')
-        values = (DealYMD, 거래금액, 건축년도, 도로명, 법정동, 아파트, 전용면적, 지번, 지역코드, 층, 구)
-        rows_to_insert.append(values)
+    return dataframe.coalesce(1).write.format("jdbc").options(
+            url='jdbc:mysql://localhost:3307/airflow',
+            driver='com.mysql.cj.jdbc.Driver',
+            dbtable='real_estate_transaction',
+            user='root',
+            password='root'
+        ).mode('overwrite').save()
     
-    sql = "INSERT INTO Real_Estate_Transaction (DealYMD, 거래금액, 건축년도, 도로명, 법정동, 아파트, 전용면적, 지번, 지역코드, 층, 구) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    cur.executemany(sql, rows_to_insert)
-
-    cur.execute("COMMIT;") #commit안하면 위에 있는 것들 insert하더라도 MYSQL테이블에 들어가지 못함
-    print(f"{len(df)} rows inserted into Real_Estate_Transaction table.")
-
-    
-
-def table_exists(cur, table_name):
-    return cur.execute("SHOW TABLES LIKE 'real_estate_transaction'")
-
-
-#To manage data with Full-Refresh
-def truncate_table(table_name, **kwargs):
-    # Use MySqlHook for MySQL connection
-    hook = MySqlHook(mysql_conn_id='mysql_localhost')
-    cur = hook.get_sqlalchemy_engine()
-
-    # Check if the table exists
-    if table_exists(cur, table_name):
-        try:
-            # Truncate the existing table
-            cur.execute(f"TRUNCATE TABLE {table_name}")
-            cur.execute("COMMIT;")
-            print(f"Table '{table_name}' truncated successfully.")
-        except Exception as truncate_error:
-            print(f"Error truncating table: {truncate_error}")
-    else:
-        print(f"Table '{table_name}' does not exist.")
-
 
 
 sql = """
@@ -243,6 +228,7 @@ current_date = datetime.now().strftime("%Y-%m-%d")
 file_with_date = f'Seoul_gu_transaction_{current_date}.csv'
 
 
+
 with DAG(
     'get_api_data',
     schedule_interval='* 9 * * *',  
@@ -251,21 +237,13 @@ with DAG(
     tags=['RealEstate'],
     default_args={
         'retries': 12,
-        'retry_delay': timedelta(minutes=1),
-        'on_failure_callback': slack.on_failure_callback,
+        'retry_delay': timedelta(minutes=1)
     }
 ) as dag:
     
-    truncate_existing_data_task = PythonOperator(
-        task_id="truncate_existing_data",
-        python_callable=truncate_table,
-        op_args=['Real_Estate_Transaction'],
-        provide_context=True
-    )
-
-    load_task = PythonOperator(
-        task_id="load_data",
-        python_callable=load
+    ETL_DATA_Mysql = PythonOperator(
+        task_id="ETL_data",
+        python_callable=loadToMySQL
     )
 
     mysql_to_s3 = SqlToS3Operator(
@@ -281,5 +259,4 @@ with DAG(
         dag = dag
     )
 
-    truncate_existing_data_task >> load_task >> mysql_to_s3
-
+    ETL_DATA_Mysql >> mysql_to_s3

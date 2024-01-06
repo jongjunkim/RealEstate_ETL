@@ -13,6 +13,7 @@
 # 프로젝트 변경사항
 1. 맨처음 Window 환경에서 돌렸으나 현업에서 linux를 많이 쓰기에 linux환경에 익숙해 지기 위해 우분투를 이용해 서버 구축
 2. Data processing을 기존에는 python Dataframe을 이용했으나 추후에 빅데이터를 처리하기 위해서는 Spark를 이용해야하기 때문에 Spark Dataframe을 이용해서 Data preprocessing 및 analysis
+3. BI tools를 이용하려 했지만 Node.js를 이용해서 사이트에 가격 그래프를 만들어보는게 더 개발에 있어서 의미 있다고 생각되어서 Visualization 구현
 
 # DAG Pipeline
 Public RESTful API -> MySQL -> S3 -> SPARK(ELT) -> Imagefile

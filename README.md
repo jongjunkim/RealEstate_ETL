@@ -48,4 +48,9 @@ Public RESTful API -> MySQL -> S3 -> SPARK(ELT) -> Imagefile
 # S3 bucket
 ![image](https://github.com/jongjunkim/RealEstate_ETL/blob/main/image/s3done.PNG)
 
+# Ubuntu로 환경옮기고 난후 Airflow 스케쥴링해서 MySQL에 데이터 적재
+![image](https://github.com/jongjunkim/RealEstate_ETL/blob/main/image/spark%20data.PNG)
+
+# Node.Js 와 Express 이용해서 간단한 가격 그래프 구현
+![image](https://github.com/jongjunkim/RealEstate_ETL/blob/main/image/%EB%91%90%EC%82%B0%EC%95%84%ED%8C%8C%ED%8A%B8%20%EA%B0%80%EA%B2%A9.PNG)
 

@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  nav.navbar.navbar-default
+    .container-fluid
+      .navbar-header
+        a.navbar-brand RealEstate VISUAL
+      ul.nav.navbar-nav
+        li.dropdown
+          a.dropdown-toggle(data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+            | Transaction
+            span.caret
+          ul.dropdown-menu
+            li
+              a(onclick="loadDailyTable()") DAILY OPEN
+
+  #date(align="center")
+    input.form-control.form-control-user#datepicker1(type="text", style="width:120px; text-align:center;")
+    label.label-user(style="text-align: center;")
+    input.form-control.form-control-user#datepicker2(type="text", style="width:120px; text-align:center;")
+
+  br
+  .row
+    #myDiv(style='height: 680px; margin-left: 40px').col-md-11.col-sm-1
+    .col-md-1.col-sm-1

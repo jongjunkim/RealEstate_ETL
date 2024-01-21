@@ -8,7 +8,7 @@
 2. 그리고 MySQL에 데이터를 Amazon S3에 적재 (MySQL to Amazon S3)  Done
 3. S3에 저장되어이 있는 데이터를 Pyspark이용해서 ELT (Meaningful data) Done
 4. Slack으로 에러 확인 (Slack Integration for Error Notification) Done
-5. Data Visualation BI tools사용 (Data Visualization with BI Tools) To be done
+5. Data Visualation BI tools사용 (Data Visualization with BI Tools) X
 
 # 프로젝트 변경사항
 1. 맨처음 Window 환경에서 돌렸으나 현업에서 linux를 많이 쓰기에 linux환경에 익숙해 지기 위해 우분투를 이용해 서버 구축
@@ -16,8 +16,7 @@
 3. BI tools를 이용하려 했지만 Node.js를 이용해서 사이트에 가격 그래프를 만들어보는게 더 개발에 있어서 의미 있다고 생각되어서 Visualization 구현
 
 # DAG Pipeline
-Public RESTful API -> MySQL -> S3 -> SPARK(ELT) -> Imagefile
-
+Public RESTful API -> Spark -> MySQL -> S3 -> Data visulaization(Node.js)
 - **Volume**
 # Note
 ## Issue

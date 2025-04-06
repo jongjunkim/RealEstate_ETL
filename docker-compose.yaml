@@ -1,43 +1,125 @@
-version: '3.7'
+version: '3.8'
 
-services:   
-  namenode:
+services:
+  #######################
+  #       Hadoop        #
+  #######################
+  hadoop-namenode:
     image: bde2020/hadoop-namenode:2.0.0-hadoop3.2.1-java8
     container_name: namenode
-    hostname: namenode
     environment:
       - CLUSTER_NAME=test
-      - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
-      - HDFS_CONF_dfs_replication=1
-      - HDFS_CONF_dfs_namenode_datanode_registration_ip_hostname_check=false
     ports:
       - "9870:9870"
       - "9000:9000"
     volumes:
-      - ./data/hadoop_namenode:/hadoop/dfs/name
-      - ./hdfs/hadoop/conf:/etc/hadoop/conf
+      - hadoop_namenode:/hadoop/dfs/name
     networks:
-      dahbest:
-        aliases:
-          - namenode
-        ipv4_address: 172.80.0.102
+      - data-net
 
-  datanode:
+  hadoop-datanode:
     image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
     container_name: datanode
-    hostname: datanode
     environment:
       - CLUSTER_NAME=test
-      - NAMENODE_HOST=namenode
-      - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
-      - HDFS_CONF_dfs_datanode_data_dir=file:///hadoop/dfs/data
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
     ports:
       - "9864:9864"
     volumes:
-      - ./data/hadoop_datanode:/hadoop/dfs/data
-      - ./hdfs/hadoop/conf:/etc/hadoop/conf
+      - hadoop_datanode:/hadoop/dfs/data
+    depends_on:
+      - hadoop-namenode
     networks:
-      dahbest:
-        aliases:
-          - datanode
+      - data-net
+
+  #######################
+  #        Spark        #
+  #######################
+  spark-master:
+    image: bitnami/spark:3.5
+    container_name: spark-master
+    environment:
+      - SPARK_MODE=master
+    ports:
+      - "7077:7077"
+      - "8080:8080"
+    networks:
+      - data-net
+
+  spark-worker:
+    image: bitnami/spark:3.5
+    container_name: spark-worker
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+    depends_on:
+      - spark-master
+    ports:
+      - "8081:8081"
+    networks:
+      - data-net
+
+  #######################
+  #     Airflow + DB    #
+  #######################
+  postgres:
+    image: postgres:15
+    container_name: airflow-postgres
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - airflow_net
+
+  airflow-webserver:
+    build:
+      context: ./airflow
+    container_name: airflow-webserver
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+      - AIRFLOW__WEBSERVER__PORT=8080
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+    depends_on:
+      - postgres
+    ports:
+      - "9090:8080"
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+    command: bash -c "
+      airflow db upgrade &&
+      airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com &&
+      airflow webserver"
+    networks:
+      - airflow_net
+
+  airflow-scheduler:
+    build:
+      context: ./airflow
+    container_name: airflow-scheduler
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+    depends_on:
+      - airflow-webserver
+      - postgres
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+    command: airflow scheduler
+    networks:
+      - airflow_net
+
+volumes:
+  hadoop_namenode:
+  hadoop_datanode:
+  postgres_data:
+
+networks:
+  data-net:
+  airflow_net:
 
